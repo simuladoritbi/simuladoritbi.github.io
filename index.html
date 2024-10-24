@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedro Miguez - PGV Palotina</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="pesquisa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1 class="professional-title">PGV RURAL PALOTINA</h1>
+            <div class="chartsContainer">
+                <!-- Gráficos serão inseridos aqui -->
+            </div>
+            <label for="opacitySlider">Transparência</label>
+            <input type="range" id="opacitySlider" min="0" max="1" step="0.1" value="1">
+            <label for="amostrasCheckbox">Ativar camada Amostras</label>
+            <input type="checkbox" id="amostrasCheckbox">
+            <div id="legendContainer">
+                <h3>Legenda</h3>
+                <img id="layerLegend" src="" alt="Legenda da camada valores_reg_final">
+            </div>
+        </div>
+        
+        <div id="map" class="map">
+            <!-- Mapa será inserido aqui -->
+        </div>
+
+        <div class="right-panel">
+            <div id="simulador">
+                <h2>Parâmetros de Cálculo do Terreno</h2>
+        
+                <div class="form-group row">
+                    <div class="field-container">
+                        <label for="areaTerreno">Área (ha):</label>
+                        <input type="text" id="areaTerreno">
+                    </div>
+                    <div class="field-container">
+                        <label for="valorHa">Valor do Hectare (R$):</label>
+                        <input type="text" id="valorHa">
+                    </div>
+                </div>
+        
+                <div class="form-group row">
+                    <div class="field-container">
+                        <label for="localizacao">Localização:</label>
+                        <select id="localizacao">
+                            <option value="0">Selecione</option>
+                            <option value="30">Imediata</option>
+                            <option value="20">Reduzida</option>
+                            <option value="5">Periférica</option>
+                        </select>
+                    </div>
+                    <div class="field-container">
+                        <label for="acesso">Acesso:</label>
+                        <select id="acesso">
+                            <option value="0">Selecione</option>
+                            <option value="30">Acesso direto ou próximo</option>
+                            <option value="15">Acesso Moderado</option>
+                            <option value="10">Acesso distante</option>
+                        </select>
+                    </div>
+                    <div class="field-container">
+                        <label for="textura">Textura:</label>
+                        <select id="textura">
+                            <option value="0">Selecione</option>
+                            <option value="1">Arenosa</option>
+                            <option value="10">Argilosa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="benfeitorias" class="benfeitorias-section">
+                    <h2>Benfeitorias</h2>
+                    <button id="addBenfeitoriaButton" class="add-button">
+                        <i class="fa-solid fa-circle-plus" style="font-size: 1.5em;"></i> Adicionar Benfeitoria
+                    </button>
+                    <table id="benfeitoriasTable" class="benfeitorias-table">
+                        <thead>
+                            <tr>
+                                <th>Categoria</th>
+                                <th>Qtd</th>
+                                <th>Un</th>
+                                <th>Valor Unitário (R$)*</th>
+                                <th>Valor Total (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas de benfeitorias serão adicionadas aqui -->
+                        </tbody>
+                    </table>
+                    <p style="font-size: 0.75em; color: rgb(97, 94, 94); margin-top: -5px;">
+                        *Valor das benfeitorias conforme determinação da FAEP, 2023.
+                    </p>
+                </div>
+
+                <div id="indices" class="indices-section">
+                    <h2>Índices</h2>
+                    <div class="checkbox-container">
+                        <div>
+                            <input type="checkbox" id="check_urbano">
+                            <label for="check_urbano">Próxima a Perímetro Urbano</label>
+                            <span id="percent_urbano" class="percent-indicator">+0%</span>
+                        </div>
+                        
+                        <div>
+                            <input type="checkbox" id="check_pasto">
+                            <label for="check_pasto">Utilizada Para Pastagem</label>
+                            <span id="percent_pasto" class="percent-indicator">+0%</span>
+                        </div>
+                        
+                        <div>
+                            <input type="checkbox" id="check_cultura">
+                            <label for="check_cultura">Utilizada para Culturas</label>
+                            <span id="percent_cultura" class="percent-indicator">+0%</span>
+                        </div>
+                
+                        <div>
+                            <label for="editableIndex">Índice de Negociação:</label>
+                            <input type="number" id="editableIndex" value="-10" min="-100" max="100" step="0.1">
+                            <span id="percent_custom" class="percent-indicator">-10%</span>
+                            <span id="warningMessage" class="warning-message">Cuidado: O valor deve estar entre -10% e +10%.</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="aliquota-section">
+                    <label for="aliquota">Alíquota (%):</label>
+                    <input type="number" id="aliquota" value="2" step="0.01">
+                    <button id="addSimulacaoButton" class="add-simulacao-button">Adicionar Simulação</button>
+                </div>
+                
+                <div id="simulacoes" class="simulacoes-section">
+                    <h2>Simulações</h2>
+                    <table id="simulacoesTable" class="simulacoes-table">
+                        <thead>
+                            <tr>
+                                <th>Valor do Terreno</th>
+                                <th>Valor das Benfeitorias</th>
+                                <th>Valor Venal do Imóvel</th>
+                                <th>ITBI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas de simulação serão adicionadas aqui -->
+                        </tbody>
+                    </table>
+                    <button id="exportarResultadoButton" class="exportar-button">Exportar Resultado</button>
+                </div>
+                
+
+            </div>
+                        <div id="amostra" style="display: none;">
+                <h2>Informações da Amostra</h2>
+                <div class="form-group row">
+                    <div class="field-container">
+                        <label>ID:</label>
+                        <span id="amostraId"></span>
+                    </div>
+                    <div class="field-container">
+                        <label>Área (ha):</label>
+                        <span id="amostraArea"></span>
+                    </div>
+                    <div class="field-container">
+                        <label>Valor (R$/Ha):</label>
+                        <span id="amostraValorHa"></span>
+                    </div>
+                    <div class="field-container">
+                        <label>Valor Total:</label>
+                        <span id="amostraValorTotal"></span>
+                    </div>
+                    <div class="field-container">
+                        <label>Tipo de Pesquisa:</label>
+                        <span id="amostraTipoPesquisa"></span>
+                    </div>
+                    <div class="field-container">
+                        <label>Observações:</label>
+                        <textarea id="amostraObservacao" rows="4" readonly></textarea>
+                    </div>
+                </div>
+                <button id="voltarSimuladorButton">Voltar ao Simulador</button>
+            </div>
+            </div>
+
+            
+            <!-- Modal para selecionar o tipo de benfeitoria -->
+            <div id="benfeitoriaTipoModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 style="flex: 1; text-align: center;">Adicionar Benfeitoria</h2>
+                        <span id="closeTipoModalButton" class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <select id="tipoBenfeitoriaSelect">
+                            <option value="">Selecione o tipo</option>
+                            <option value="aviarios">Aviários</option>
+                            <option value="suinos">Granja de Suínos</option>
+                            <option value="piscicultura">Piscicultura</option>
+                            <option value="outros">Outros</option>
+                        </select>
+
+                        <div id="aviariosContent" class="benfeitoria-content">
+                            <label for="areaAviarios">Área (m²):</label>
+                            <input type="number" id="areaAviarios">
+                            <label for="valorM2Aviarios">Valor por m² (R$):</label>
+                            <input type="number" id="valorM2Aviarios" value="643.65" readonly>
+                            <button id="addAviariosButton">Adicionar</button>
+                        </div>
+
+                        <div id="suinosContent" class="benfeitoria-content">
+                            <label for="areaSuinos">Área (m²):</label>
+                            <input type="number" id="areaSuinos">
+                            <label for="valorM2Suinos">Valor por m² (R$):</label>
+                            <input type="number" id="valorM2Suinos" value="643.65" readonly>
+                            <button id="addSuinosButton">Adicionar</button>
+                        </div>
+
+                        <div id="pisciculturaContent" class="benfeitoria-content">
+                            <label for="quantidadePiscicultura">Quantidade:</label>
+                            <input type="number" id="quantidadePiscicultura">
+                            <label for="valorUnitarioPiscicultura">Valor Unitário (R$):</label>
+                            <input type="number" id="valorUnitarioPiscicultura" value="30800" readonly>
+                            <button id="addPisciculturaButton">Adicionar</button>
+                        </div>
+
+                        <div id="outrosContent" class="benfeitoria-content">
+                            <label for="categoriaOutros">Categoria:</label>
+                            <input type="text" id="categoriaOutros" value="Outros">
+                            <label for="quantidadeOutros">Quantidade:</label>
+                            <input type="number" id="quantidadeOutros">
+                            <label for="unidadeOutros">Unidade:</label>
+                            <input type="text" id="unidadeOutros" value="un">
+                            <label for="valorUnitarioOutros">Valor Unitário (R$):</label>
+                            <input type="number" id="valorUnitarioOutros">
+                            <button id="addOutrosButton">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+    <script src="pesquisa.js"></script>
+    <script src="script.js"></script>
+    <script src="modal.js"></script>
+    <script src="map.js"></script> 
+    <script src="simulacao.js"></script>
+</body>
+</html>
