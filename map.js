@@ -2,7 +2,8 @@
 
 // Lucas, se você está lendo isso, saiba que cada gambiarra e POG desse código nasceu da necessidade urgente de fazer esse simulador funcionar "pra ontem". Não foi por escolha, foi pela sobrevivência! :)
 
-const legendUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=50&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pgv_rural_imovel';
+const legendUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pgv_rural_imovel';
+const legendU2 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pesquisa_imobiliaria_rural';
 
 // Define as camadas do mapa
 const camadaImagemRecente = new ol.layer.Tile({
@@ -61,6 +62,7 @@ document.getElementById('opacitySlider').addEventListener('input', (event) => {
 
 // Exibir a legenda na barra lateral esquerda
 document.getElementById('layerLegend').src = legendUrl;
+document.getElementById('layerLegend2').src = legendU2;
 
 // URL base para GetFeatureInfo
 const featureInfoUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms';

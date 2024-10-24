@@ -11,19 +11,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
+    <div class="header-container">
+        <div class="logo-container">
+            <img src="logo_palotina.png" alt="Logo 1">
+        </div>
+        <div class="title-container">
+            <h2>Prefeitura de Palotina</h2>
+            <h3>Guia de ITBI</h3>
+        </div>
+        <div class="logo-containerdir">
+            <img src="logo_drz.png" alt="Logo 1">
+        </div>
+    </div>
     <div class="container">
         <div class="left-panel">
-            <h1 class="professional-title">PGV RURAL PALOTINA</h1>
-            <div class="chartsContainer">
-                <!-- Gráficos serão inseridos aqui -->
-            </div>
+            <h1 class>PGV RURAL</h1>
             <label for="opacitySlider">Transparência</label>
             <input type="range" id="opacitySlider" min="0" max="1" step="0.1" value="1">
-            <label for="amostrasCheckbox">Ativar camada Amostras</label>
-            <input type="checkbox" id="amostrasCheckbox">
             <div id="legendContainer">
-                <h3>Legenda</h3>
+                <h2>Legenda</h2>
                 <img id="layerLegend" src="" alt="Legenda da camada valores_reg_final">
+            </div>
+            <input type="checkbox" id="amostrasCheckbox" value="1" checked>
+            <h1 for="amostrasCheckbox" style="display: inline-block; margin-right: 10px;">Levantamento imobiliário</h1>
+                       
+            
+            <div id="legendContainer">
+                <h2>Legenda</h2>
+                <img id="layerLegend2" src="" alt="Legenda da camada valores_reg_final">
             </div>
         </div>
         

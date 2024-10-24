@@ -8,7 +8,8 @@ body {
 .container {
     display: grid;
     grid-template-columns: 280px 1fr 650px;
-    height: 100vh;
+    height: calc(100vh - 80px); 
+    padding-top: 80px;
 }
 
 .left-panel, .right-panel {
@@ -100,4 +101,105 @@ th {
 #clearFilterButton:hover {
     background: linear-gradient(135deg, #c1cad3, #a7a6ac);
     transform: translateY(-2px);
+}
+
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #095d93; /* Blue background */
+    height: 80px; /* Set the header height to 80px */
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    position: fixed; /* Keeps the header fixed */
+    top: 0;
+    z-index: 1000;
+    color: white;
+    padding: 0 20px; /* Adjust padding to remove extra space */
+}
+
+.logo-container img {
+    height: 70px;
+    margin-right: 20px;
+}
+
+.title-container {
+    text-align: left;
+    color: white; /* White text color */
+}
+
+.title-container h2 {
+    margin: 0;
+    font-size: 20px; /* Set to 32px as requested */
+    color: white; /* White text color */
+}
+
+.title-container h3 {
+    margin: 0;
+    font-size: 16px; /* Smaller font size */
+    font-weight: 400; /* Regular font weight */
+    color: white; /* White text color */
+    padding: 2px;
+}
+
+.subtitle {
+    margin-top: 5px;
+    font-size: 16px; /* Adjusted font size for subtitle */
+}
+.logo-containerdir {
+    display: flex;
+    align-items: center; /* Alinha verticalmente a logo, se necessário */
+    margin-left: auto; /* Empurra o conteúdo para a direita */
+}
+
+.logo-containerdir img {
+    height: 70px;
+    margin-right: 30px;
+}
+.left-panel h1 {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 20px; /* Aumenta o espaço abaixo do título */
+    text-align: left;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.left-panel h2 {
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.left-panel label {
+    display: block; /* Força os labels a ficarem em linhas separadas */
+    margin-top: 20px; /* Adiciona mais espaço acima de cada label */
+    margin-bottom: 10px; /* Adiciona espaço abaixo de cada label */
+}
+
+.left-panel input[type="range"],
+.left-panel input[type="checkbox"] {
+    margin-bottom: 20px; /* Adiciona espaço abaixo dos inputs */
+}
+
+.left-panel #legendContainer {
+    margin-top: 20px; /* Espaço antes da legenda */
+    padding-bottom: 20px; /* Espaço abaixo da legenda */
+}
+
+.left-panel img {
+    margin-bottom: 20px; /* Espaço abaixo das imagens da legenda */
+}
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Alinha o checkbox e o texto na mesma linha */
+    margin-bottom: 20px; /* Adiciona um espaçamento entre o item e os outros elementos */
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px; /* Espaço entre o checkbox e o texto */
 }
