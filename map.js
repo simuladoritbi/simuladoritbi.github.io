@@ -89,6 +89,35 @@ map.on('singleclick', async function (event) {
         }
     );
 
+        // Verifica se o clique foi na camada amostras_pgvr
+        const urlAmostras = camadaAmostras.getSource().getFeatureInfoUrl(
+            event.coordinate,
+            viewResolution,
+            'EPSG:3857',
+            {
+                'INFO_FORMAT': 'application/json',
+                'QUERY_LAYERS': 'pesquisa_imobiliaria_rural'
+            }
+        );
+    if (urlAmostras) {
+            try {
+                const response = await fetch(urlAmostras);
+                const data = await response.json();
+    
+                if (data.features && data.features.length > 0) {
+                    const featureInfo = data.features[0].properties;
+    
+                    // Chama a função ou executa uma ação para amostras_pgvr
+                    console.log(featureInfo);
+                    showAmostraPanel(featureInfo);
+                    return;
+                } else {
+                    console.log("Nenhuma feição encontrada na camada amostras_pgvr.");
+                }
+            } catch (error) {
+                console.error("Erro ao obter dados da feição (amostras_pgvr):", error);
+            }
+        }
     if (urlPGV) {
         try {
             const response = await fetch(urlPGV);
@@ -219,6 +248,7 @@ map.on('singleclick', async function (event) {
             console.error("Erro ao obter dados da feição (pgv_rural_imovel):", error);
         }
     }
+
 });
 
 // Controle de visibilidade da camada com checkbox
