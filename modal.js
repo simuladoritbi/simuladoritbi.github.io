@@ -325,7 +325,8 @@ document.getElementById("check_cultura").addEventListener('change', function() {
 document.getElementById('exportarResultadoButton').addEventListener('click', function () {
     // Pega o ID da amostra
     const amostraId = id_imovel;
-    
+    if (amostraId > 0)
+    {
     // Pegar os dados da tabela de simulações
     const table = document.getElementById('simulacoesTable');
     let tableData = [];
@@ -351,6 +352,10 @@ document.getElementById('exportarResultadoButton').addEventListener('click', fun
 
     // Abrir a nova página passando os parâmetros na URL
     window.open(url, '_blank');
+    }
+    else {
+        alert("Você deve selecionar um imóvel para exportar.");
+    }
 });
 
 function saveEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell) {

@@ -38,6 +38,7 @@ function updateFilteredWFSData(cqlFilter) {
         .then(data => {
             console.log(data);
             preencherFormulario(data); 
+            console.log(wfsUrl)
         })
         .catch(error => console.error('Erro ao buscar dados WFS filtrados:', error));
 }
