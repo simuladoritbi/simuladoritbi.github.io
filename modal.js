@@ -38,11 +38,27 @@ function populateSimuladorPanel(featureInfo) {
 
 // Função para limpar todas as linhas da tabela de benfeitorias
 function clearTable() {
-    const tableBody = document.getElementById("benfeitoriasTable").getElementsByTagName("tbody")[0];
+    const benfeitoriasTable = document.getElementById("benfeitoriasTable");
+    console.log('benfeitoriasTable:', benfeitoriasTable);
+    if (!benfeitoriasTable) {
+        console.error('Elemento benfeitoriasTable não encontrado.');
+        return;
+    }
+
+    let tableBody = benfeitoriasTable.querySelector('tbody');
+    console.log('tableBody:', tableBody);
+    if (!tableBody) {
+        console.warn('Elemento não encontrado');
+        tableBody = document.createElement('tbody');
+        benfeitoriasTable.appendChild(tableBody);
+    }
+
     while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.firstChild);
     }
+
     updateTotalRow();
+    updateBenfeitoriasCount();
 }
 
 // Substitua a função formatNumber por esta versão corrigida:
@@ -89,26 +105,41 @@ function addBenfeitoriaToTable(categoria, quantidade, unidade, valorUnitario) {
     const tableBody = document.getElementById("benfeitoriasTable").getElementsByTagName("tbody")[0];
     const row = tableBody.insertRow();
 
+    // Adiciona as células de categoria, quantidade e unidade
     row.insertCell(0).textContent = categoria;
-    row.insertCell(1).textContent = formatNumber(quantidade);
-    row.insertCell(2).textContent = unidade;
-    row.insertCell(3).textContent = formatNumber(valorUnitario);
+    const qtdCell = row.insertCell(1);
+    qtdCell.textContent = formatNumber(quantidade);
+    const unidadeCell = row.insertCell(2);
+    unidadeCell.textContent = unidade;
 
-    const valorTotal = (quantidade * valorUnitario);
+    // Adiciona a célula de valor unitário
+    const valorUnitarioCell = row.insertCell(3);
+    valorUnitarioCell.textContent = formatNumber(valorUnitario);
+
+    // Adiciona a célula de valor total com ícones de edição e lixeira
+    const valorTotal = quantidade * valorUnitario;
     const valorTotalCell = row.insertCell(4);
     valorTotalCell.innerHTML = `
         ${formatNumber(valorTotal)}
+        <i class="fa-solid fa-pen-to-square edit-icon" style="margin-left: 10px; cursor: pointer;color: #FFD43B;"></i>
         <i class="fa-solid fa-trash-can delete-icon" style="margin-left: 10px; cursor: pointer;"></i>
     `;
 
-    // Evento para exclusão da linha e marcação de modificação
-    valorTotalCell.querySelector(".delete-icon").addEventListener("click", function() {
-        tableBody.removeChild(row);
-        isTableModified = true;
-        updateTotalRow();
+    // Evento para ativar o modo de edição
+    valorTotalCell.querySelector(".edit-icon").addEventListener("click", function() {
+        enterEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell);
     });
 
+    // Evento para deletar a linha
+    valorTotalCell.querySelector(".delete-icon").addEventListener("click", function() {
+        tableBody.removeChild(row);
+        updateTotalRow();
+        updateBenfeitoriasCount();
+    });
+
+    // Atualiza o total e contagem de benfeitorias
     updateTotalRow();
+    updateBenfeitoriasCount();
 }
 
 // Função para preencher a tabela com informações do imóvel
@@ -141,6 +172,11 @@ function populateTableWithFeatureInfo(featureInfo,id) {
     }
     limparTabela();
     adicionarSimulacao();
+    updateBenfeitoriasCount();
+
+    // Certifique-se de que o checkbox esteja desmarcado ao carregar um novo imóvel
+    benfeitoriasCheckbox.checked = false;
+    updateBenfeitoriasDisplay();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -317,3 +353,80 @@ document.getElementById('exportarResultadoButton').addEventListener('click', fun
     window.open(url, '_blank');
 });
 
+function saveEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell) {
+    // Obtém os novos valores dos campos de entrada
+    const newQtd = parseFloat(qtdCell.querySelector("input").value);
+    const newValorUnitario = parseFloat(valorUnitarioCell.querySelector("input").value);
+
+    // Atualiza as células com os novos valores formatados
+    qtdCell.textContent = formatNumber(newQtd);
+    valorUnitarioCell.textContent = formatNumber(newValorUnitario);
+
+    // Recalcula e exibe o valor total com ícones de edição e exclusão
+    const valorTotal = newQtd * newValorUnitario;
+    valorTotalCell.innerHTML = `
+        ${formatNumber(valorTotal)}
+        <i class="fa-solid fa-pen-to-square edit-icon" style="margin-left: 10px; cursor: pointer;color: #FFD43B;"></i>
+        <i class="fa-solid fa-trash-can delete-icon" style="margin-left: 10px; cursor: pointer;"></i>
+    `;
+
+    // Restaura os eventos para edição e exclusão
+    valorTotalCell.querySelector(".edit-icon").addEventListener("click", function() {
+        enterEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell);
+    });
+
+    valorTotalCell.querySelector(".delete-icon").addEventListener("click", function() {
+        row.parentElement.removeChild(row);
+        updateTotalRow();
+        updateBenfeitoriasCount();
+    });
+
+    updateTotalRow();
+}
+function cancelEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell, originalQtd, originalValorUnitario) {
+    // Restaura os valores originais formatados
+    qtdCell.textContent = formatNumber(originalQtd);
+    valorUnitarioCell.textContent = formatNumber(originalValorUnitario);
+
+    // Restaura a célula "Valor Total" com os ícones de edição e exclusão
+    const valorTotal = originalQtd * originalValorUnitario;
+    valorTotalCell.innerHTML = `
+        ${formatNumber(valorTotal)}
+        <i class="fa-solid fa-pen-to-square edit-icon" style="margin-left: 10px; cursor: pointer; color: #FFD43B;"></i>
+        <i class="fa-solid fa-trash-can delete-icon" style="margin-left: 10px; cursor: pointer;"></i>
+    `;
+
+    // Restaura os eventos para edição e exclusão
+    valorTotalCell.querySelector(".edit-icon").addEventListener("click", function() {
+        enterEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell);
+    });
+
+    valorTotalCell.querySelector(".delete-icon").addEventListener("click", function() {
+        row.parentElement.removeChild(row);
+        updateTotalRow();
+        updateBenfeitoriasCount();
+    });
+}
+
+// No enterEditMode, passe o `row` ao chamar cancelEditMode
+function enterEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell) {
+    const originalQtd = parseFloat(qtdCell.textContent.replace(".", "").replace(",", "."));
+    const originalValorUnitario = parseFloat(valorUnitarioCell.textContent.replace(".", "").replace(",", "."));
+
+    qtdCell.innerHTML = `<input type="number" value="${originalQtd}" style="width: 60px;" />`;
+    valorUnitarioCell.innerHTML = `<input type="number" value="${originalValorUnitario}" style="width: 80px;" />`;
+
+    valorTotalCell.innerHTML = `
+        ${formatNumber(originalQtd * originalValorUnitario)}
+        <i class="fa-solid fa-circle-chevron-down save-icon" style="margin-left: 10px; cursor: pointer; color: #15762f;"></i>
+        <i class="fa-solid fa-circle-xmark cancel-icon" style="margin-left: 10px; cursor: pointer; color: #971515;"></i>
+    `;
+
+    valorTotalCell.querySelector(".save-icon").addEventListener("click", function() {
+        saveEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell);
+    });
+
+    valorTotalCell.querySelector(".cancel-icon").addEventListener("click", function() {
+        cancelEditMode(row, qtdCell, valorUnitarioCell, valorTotalCell, originalQtd, originalValorUnitario);
+    });
+}

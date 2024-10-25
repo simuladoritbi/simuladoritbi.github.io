@@ -224,12 +224,11 @@ async function editPdf() {
 
     // Remover "R$" e possíveis espaços adicionais do primeiro valor
     let VTN = valoresArray[0].trim();
-    let VB = valoresArray[1].trim();
     let VV = valoresArray[2].trim();
     let Itbi = valoresArray[3].trim();
     
     // Criar a string concatenada com os valores e os textos fixos
-    let resultado = `Valor Venal Territorial: ${VTN}   Valor Venal Predial: ${VB}   Valor Venal Imóvel: ${VV}   ITBI: ${Itbi}`;
+    let resultado = `Valor Venal Territorial: ${VTN}  Valor Venal Imóvel: ${VV}   ITBI: ${Itbi}`;
     
     firstPage.drawText(resultado, {
         x: 80,

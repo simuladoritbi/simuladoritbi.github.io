@@ -20,6 +20,13 @@
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
 }
+#simulador h3 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
 
 .form-group.row {
     display: flex;
@@ -131,11 +138,11 @@
 
 .indices-section {
     background-color: #f9f9f9;
-    padding: 15px;
+    padding: 0px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-top: 5px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;

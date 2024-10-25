@@ -53,26 +53,30 @@ function adicionarSimulacao() {
     const i_urbano = document.getElementById("check_urbano").checked ? 1.15 : 1;
     const i_pasto = document.getElementById("check_pasto").checked ? 0.9634 : 1;
     const i_cultura = document.getElementById("check_cultura").checked ? 1.051 : 1;
-    
+
     // Novo índice personalizável
     const i_custom = parseFloat(document.getElementById("editableIndex").value) / 100 || 0;
+
+    const transmissao = parseFloat(document.getElementById("transmitida").value.replace(',', '.')) / 100 || 0.04;
 
     // Calcula o índice total
     const indice = (i_urbano + i_pasto + i_cultura + i_custom) - 2;
 
-    // Obter o valor total das benfeitorias
-    const benfeitoriasTable = document.getElementById("benfeitoriasTable").getElementsByTagName("tbody")[0];
+    // Obter o valor total das benfeitorias somente se o checkbox estiver marcado
     let valorBenfeitoria = 0;
-    for (let row of benfeitoriasTable.rows) {
-        if (row.cells[4]) {
-            const valorTotal = parseFloat(row.cells[4].innerText.replace(/[R$\.\s]/g, '').replace(',', '.')) || 0;
-            valorBenfeitoria += valorTotal;
+    if (benfeitoriasCheckbox.checked) {
+        const benfeitoriasTableBody = benfeitoriasTable.getElementsByTagName("tbody")[0];
+        for (let row of benfeitoriasTableBody.rows) {
+            if (row.cells[4]) {
+                const valorTotal = parseFloat(row.cells[4].innerText.replace(/[R$\.\s]/g, '').replace(',', '.')) || 0;
+                valorBenfeitoria += valorTotal;
+            }
         }
     }
 
     // Calcula o resultado final com base na fórmula
-    const terreno = (area * valorHa * indice);
-    const venal = (terreno + valorBenfeitoria);
+    const terreno = (area * valorHa * indice * transmissao);
+    const venal = (terreno + (valorBenfeitoria*transmissao));
     const resultado = venal * aliquota;
 
     // Cria uma nova linha para a tabela de simulações

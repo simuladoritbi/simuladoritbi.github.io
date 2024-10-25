@@ -33,7 +33,7 @@
                 <img id="layerLegend" src="" alt="Legenda da camada valores_reg_final">
             </div>
             <input type="checkbox" id="amostrasCheckbox" value="1" checked>
-            <h1 for="amostrasCheckbox" style="display: inline-block; margin-right: 10px;">Levantamento imobiliário</h1>
+            <h1 for="amostrasCheckbox" style="display: inline-block; margin-right: 10px;">Levantamento Imobiliário</h1>
                        
             
             <div id="legendContainer">
@@ -91,28 +91,36 @@
                 </div>
 
                 <div id="benfeitorias" class="benfeitorias-section">
-                    <h2>Benfeitorias</h2>
-                    <button id="addBenfeitoriaButton" class="add-button">
-                        <i class="fa-solid fa-circle-plus" style="font-size: 1.5em;"></i> Adicionar Benfeitoria
-                    </button>
-                    <table id="benfeitoriasTable" class="benfeitorias-table">
-                        <thead>
-                            <tr>
-                                <th>Categoria</th>
-                                <th>Qtd</th>
-                                <th>Un</th>
-                                <th>Valor Unitário (R$)*</th>
-                                <th>Valor Total (R$)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Linhas de benfeitorias serão adicionadas aqui -->
-                        </tbody>
-                    </table>
-                    <p style="font-size: 0.75em; color: rgb(97, 94, 94); margin-top: -5px;">
-                        *Valor das benfeitorias conforme determinação da FAEP, 2023.
-                    </p>
+                    <div class="benfeitorias-header">
+                        <input type="checkbox" id="benfeitoriasCheckbox" style="margin-right: 10px;">
+                        <h3 style="margin: 0;">Benfeitorias</h3>
+                        <span id="benfeitoriasCount" style="font-size: 0.9em; color: #666; margin-left: 10px;"></span>
+                    </div>
+                    <div id="benfeitoriasContent" style="margin-top: 5px;">
+                        <button id="addBenfeitoriaButton" class="add-button">
+                            <i class="fa-solid fa-circle-plus" style="font-size: 1.1em;    margin: -5px; margin-right: 5px;"></i> Adicionar Benfeitoria
+                        </button>
+                        <table id="benfeitoriasTable" class="benfeitorias-table"style="margin-top: 5px; margin-bottom: 7px;">
+                            <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th>Qtd</th>
+                                    <th>Un</th>
+                                    <th>Valor Unitário (R$)*</th>
+                                    <th>Valor Total (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Linhas de benfeitorias serão adicionadas aqui -->
+                            </tbody>
+                        </table>
+                        <p style="font-size: 0.75em; color: rgb(97, 94, 94); margin-top: -5px;">
+                            *Valor das benfeitorias conforme determinação da FAEP, 2023.
+                        </p>
+                    </div>
                 </div>
+                
+                
 
                 <div id="indices" class="indices-section">
                     <h2>Índices</h2>
@@ -146,9 +154,11 @@
                 </div>
                 
                 <div class="aliquota-section">
+                    <button id="addSimulacaoButton" class="add-simulacao-button">Adicionar Simulação</button>
                     <label for="aliquota">Alíquota (%):</label>
                     <input type="number" id="aliquota" value="2" step="0.01">
-                    <button id="addSimulacaoButton" class="add-simulacao-button">Adicionar Simulação</button>
+                    <label for="transmitida">Proporção Transmitida (%):</label>
+                    <input type="number" id="transmitida" value="100" step="0.01">
                 </div>
                 
                 <div id="simulacoes" class="simulacoes-section">
@@ -262,6 +272,7 @@
         </div>
 
     <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+    <script src="ocultar_benfeitorias.js"></script>
     <script src="pesquisa.js"></script>
     <script src="script.js"></script>
     <script src="modal.js"></script>

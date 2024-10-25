@@ -5,6 +5,13 @@
 const legendUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pgv_rural_imovel';
 const legendU2 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pesquisa_imobiliaria_rural';
 
+
+const camadaOpenStreetMap = new ol.layer.Tile({
+    source: new ol.source.OSM({
+        attributions: [] // Remove a atribuição de copyright
+    })
+});
+
 // Define as camadas do mapa
 const camadaImagemRecente = new ol.layer.Tile({
     source: new ol.source.TileWMS({
@@ -46,7 +53,7 @@ const camadaAmostras = new ol.layer.Tile({
 // Cria o mapa e define o centro e o nível de zoom
 const map = new ol.Map({
     target: 'map',
-    layers: [camadaImagemRecente, camadaPGV,camadaAmostras],
+    layers: [camadaOpenStreetMap,camadaImagemRecente, camadaPGV,camadaAmostras],
     view: new ol.View({
         center: ol.proj.fromLonLat([-53.84, -24.29]), 
         zoom: 12
@@ -141,3 +148,4 @@ map.on('singleclick', async function (event) {
 document.getElementById('amostrasCheckbox').addEventListener('change', function () {
     camadaAmostras.setVisible(this.checked);
 });
+
