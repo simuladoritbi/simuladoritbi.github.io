@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto', Helvetica Neue, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    overflow: hidden; /* Impede o scroll da página */
+    overflow: hidden; /* Impede o scroll da pÃ¡gina */
 }
 
 .container {
@@ -149,8 +149,8 @@ th {
 }
 .logo-containerdir {
     display: flex;
-    align-items: center; /* Alinha verticalmente a logo, se necessário */
-    margin-left: auto; /* Empurra o conteúdo para a direita */
+    align-items: center; /* Alinha verticalmente a logo, se necessÃ¡rio */
+    margin-left: auto; /* Empurra o conteÃºdo para a direita */
 }
 
 .logo-containerdir img {
@@ -160,7 +160,7 @@ th {
 .left-panel h1 {
     font-size: 18px;
     color: #000000;
-    margin-bottom: 20px; /* Aumenta o espaço abaixo do título */
+    margin-bottom: 20px; /* Aumenta o espaÃ§o abaixo do tÃ­tulo */
     text-align: left;
     font-weight: bold;
     padding-bottom: 5px;
@@ -176,32 +176,32 @@ th {
 }
 
 .left-panel label {
-    display: block; /* Força os labels a ficarem em linhas separadas */
-    margin-top: 20px; /* Adiciona mais espaço acima de cada label */
-    margin-bottom: 10px; /* Adiciona espaço abaixo de cada label */
+    display: block; /* ForÃ§a os labels a ficarem em linhas separadas */
+    margin-top: 20px; /* Adiciona mais espaÃ§o acima de cada label */
+    margin-bottom: 10px; /* Adiciona espaÃ§o abaixo de cada label */
 }
 
 .left-panel input[type="range"],
 .left-panel input[type="checkbox"] {
-    margin-bottom: 20px; /* Adiciona espaço abaixo dos inputs */
+    margin-bottom: 20px; /* Adiciona espaÃ§o abaixo dos inputs */
 }
 
 .left-panel #legendContainer {
-    margin-top: 20px; /* Espaço antes da legenda */
-    padding-bottom: 20px; /* Espaço abaixo da legenda */
+    margin-top: 20px; /* EspaÃ§o antes da legenda */
+    padding-bottom: 20px; /* EspaÃ§o abaixo da legenda */
 }
 
 .left-panel img {
-    margin-bottom: 20px; /* Espaço abaixo das imagens da legenda */
+    margin-bottom: 20px; /* EspaÃ§o abaixo das imagens da legenda */
 }
 .checkbox-container {
     display: flex;
     align-items: center; /* Alinha o checkbox e o texto na mesma linha */
-    margin-bottom: 20px; /* Adiciona um espaçamento entre o item e os outros elementos */
+    margin-bottom: 20px; /* Adiciona um espaÃ§amento entre o item e os outros elementos */
 }
 
 .checkbox-container input[type="checkbox"] {
-    margin-right: 10px; /* Espaço entre o checkbox e o texto */
+    margin-right: 10px; /* EspaÃ§o entre o checkbox e o texto */
 }
 
 .benfeitorias-section label {
@@ -239,44 +239,34 @@ th {
     margin: 0;
 }
 
-/* Estilo básico dos controles */
-.ol-control button {
-    background-color: #ffffff; /* Cor de fundo dos botões */
-    border: none; /* Remove a borda padrão */
-    color: #333333; /* Cor do ícone */
-    font-size: 20px; /* Aumenta o tamanho do ícone */
-    width: 1px; /* Largura do botão */
-    height: 45px; /* Altura do botão */
-    margin: 5px; /* Espaço ao redor dos botões */
-    border-radius: 8px; /* Borda arredondada */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-    transition: background-color 0.3s ease; /* Animação suave */
-}
 
-/* Ocultar o botão de rotação */
+/* Ocultar o botÃ£o de rotaÃ§Ã£o */
 .ol-rotate-reset {
-    display: none; /* Oculta o botão de rotação */
-}
+    display: none; /* Oculta o botÃ£o de rotaÃ§Ã£o */
+}/* 
+.ol-zoom-in {
+    margin-top: 90px;
+}*/
 
-/* Estilo para o contêiner de zoom em coluna */
+/* Estilo para o contÃªiner de zoom em coluna */
 .ol-zoom {
     display: flex;
-    flex-direction: column; /* Organiza os botões na vertical */
+    flex-direction: column; /* Organiza os botÃµes na vertical */
     align-items: center;
     position: absolute;
-    top: 10px;
+    top: 50px;
     left: 10px;
 }
 
-/* Estilo de cada botão de zoom */
+/* Estilo de cada botÃ£o de zoom */
 .ol-zoom button {
     background-color: #ffffff;
     border: none;
     color: #333333;
-    font-size: 20px;
-    width: 25px;
-    height: 25px;
-    margin: 5px 0; /* Espaço entre os botões */
+    font-size: 35px;
+    width: 40px;
+    height: 40px;
+    margin: 5px 0; /* EspaÃ§o entre os botÃµes */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
@@ -294,29 +284,23 @@ th {
 }
 
 .titulo-pgv {
-    padding: 10px; /* Ajuste o valor do padding conforme necessário */
+    padding: 10px; /* Ajuste o valor do padding conforme necessÃ¡rio */
 }
 
 
 .fa-solid, .fas {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    font-size: 20px; /* Aumente o tamanho do ícone conforme desejado */
+    font-size: 20px; /* Aumente o tamanho do Ã­cone conforme desejado */
 }
 
-/* Estilização específica para um ícone */
-#toggleLeftPanelIcon {
-    top: 105px; /* Posicione o ícone no painel */
-    left: 230px; /* Ajuste conforme necessário */
-    position: absolute;
-    z-index: 9999;
-}
+
 
 .header-simulador {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo no contêiner flex */
+    justify-content: center; /* Centraliza o conteÃºdo no contÃªiner flex */
     padding-bottom: 5px;
     border-bottom: 1px solid #ddd;
     font-size: 18px;
@@ -331,7 +315,7 @@ th {
 
 #closeRightPanelIcon {
     position: absolute;
-    left: 10px; /* Define a posição do ícone à esquerda */
+    left: 10px; /* Define a posiÃ§Ã£o do Ã­cone Ã  esquerda */
     font-size: 24px;
     cursor: pointer;
     padding: 5px;
@@ -353,8 +337,8 @@ th {
     display: none;
 }
 .hidden-left-panel #toggleLeftPanelIcon {
-    top: 105px;
-    left: 40px;
+    top: 87px;
+    left: 10px;
 }
 /* Esconde o painel direito */
 .hidden-right-panel .container {
@@ -365,7 +349,7 @@ th {
     display: none;
 }
 
-/* Esconde ambos os painéis */
+/* Esconde ambos os painÃ©is */
 .hidden-both-panels .container {
     grid-template-columns: auto;
 }
@@ -373,4 +357,34 @@ th {
 .hidden-both-panels .left-panel,
 .hidden-both-panels .right-panel {
     display: none;
+}
+
+#toggleLeftPanelIcon {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 87px;
+    left: 290px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+/* Efeito hover */
+#toggleLeftPanelIcon:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* Efeito de clique para telas de toque */
+#toggleLeftPanelIcon:active {
+    transform: scale(0.95);
 }
