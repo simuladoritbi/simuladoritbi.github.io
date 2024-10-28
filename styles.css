@@ -8,7 +8,7 @@ body {
 .container {
     display: grid;
     grid-template-columns: 280px 1fr 650px;
-    height: calc(100vh - 80px); 
+    height: 100vh; 
     padding-top: 80px;
 }
 
@@ -187,13 +187,12 @@ th {
 }
 
 .left-panel #legendContainer {
-    margin-top: 0px; /* Espaço antes da legenda */
-    padding-bottom: 0px; /* Espaço abaixo da legenda */
+    margin-top: 20px; /* Espaço antes da legenda */
+    padding-bottom: 20px; /* Espaço abaixo da legenda */
 }
 
 .left-panel img {
     margin-bottom: 20px; /* Espaço abaixo das imagens da legenda */
-    margin-top: -10px;
 }
 .checkbox-container {
     display: flex;
@@ -292,4 +291,86 @@ th {
 /* Efeito de clique para telas de toque */
 .ol-zoom button:active {
     transform: scale(0.95);
+}
+
+.titulo-pgv {
+    padding: 10px; /* Ajuste o valor do padding conforme necessário */
+}
+
+
+.fa-solid, .fas {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 20px; /* Aumente o tamanho do ícone conforme desejado */
+}
+
+/* Estilização específica para um ícone */
+#toggleLeftPanelIcon {
+    top: 105px; /* Posicione o ícone no painel */
+    left: 230px; /* Ajuste conforme necessário */
+    position: absolute;
+    z-index: 9999;
+}
+
+.header-simulador {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo no contêiner flex */
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+
+#closeRightPanelIcon {
+    position: absolute;
+    left: 10px; /* Define a posição do ícone à esquerda */
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.header-simulador h2 {
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+/* Esconde o painel esquerdo */
+.hidden-left-panel .container {
+    grid-template-columns: 1fr 650px;
+}
+
+.hidden-left-panel .left-panel {
+    display: none;
+}
+.hidden-left-panel #toggleLeftPanelIcon {
+    top: 105px;
+    left: 40px;
+}
+/* Esconde o painel direito */
+.hidden-right-panel .container {
+    grid-template-columns: 280px 1fr;
+}
+
+.hidden-right-panel .right-panel {
+    display: none;
+}
+
+/* Esconde ambos os painéis */
+.hidden-both-panels .container {
+    grid-template-columns: auto;
+}
+
+.hidden-both-panels .left-panel,
+.hidden-both-panels .right-panel {
+    display: none;
 }

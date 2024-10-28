@@ -147,6 +147,7 @@ map.on('singleclick', async function (event) {
                         maxZoom: 17,
                         padding: [50, 50, 50, 50]
                     });
+                    openRightPanel();
                 } else {
                     console.log("Não foi possível obter a geometria da feição via WFS.");
                 }
@@ -285,6 +286,7 @@ map.on('singleclick', async function (event) {
                         maxZoom: 17,      // Define um zoom máximo (mais longe que antes)
                         padding: [50, 50, 50, 50] // Adiciona um "acolchoamento" ao redor da feição (topo, direita, inferior, esquerda)
                     });
+                    openRightPanel();
 
                 } else {
                     console.log("Não foi possível obter a geometria da feição via WFS.");
@@ -314,3 +316,56 @@ document.getElementById('perimetroCheckbox').addEventListener('change', function
     perimetro.setVisible(this.checked);
 });
 
+function toggleLeftPanel() {
+    const body = document.body;
+
+    if (body.classList.contains('hidden-left-panel') && body.classList.contains('hidden-both-panels')) {
+        // Ambos os painéis estão ocultos, mas reabre o painel esquerdo
+        body.classList.remove('hidden-both-panels');
+    }
+    
+    if (body.classList.contains('hidden-left-panel')) {
+        // Se o painel esquerdo estiver oculto, mostre-o
+        body.classList.remove('hidden-left-panel');
+    } else {
+        // Caso contrário, oculte-o
+        body.classList.add('hidden-left-panel');
+    }
+
+    // Atualiza para ambos ocultos se necessário
+    if (body.classList.contains('hidden-left-panel') && body.classList.contains('hidden-right-panel')) {
+        body.classList.add('hidden-both-panels');
+    }
+}
+
+function toggleRightPanel() {
+    const body = document.body;
+
+    if (body.classList.contains('hidden-right-panel') && body.classList.contains('hidden-both-panels')) {
+        // Ambos os painéis estão ocultos, mas reabre o painel direito
+        body.classList.remove('hidden-both-panels');
+    }
+
+    if (body.classList.contains('hidden-right-panel')) {
+        // Se o painel direito estiver oculto, mostre-o
+        body.classList.remove('hidden-right-panel');
+    } else {
+        // Caso contrário, oculte-o
+        body.classList.add('hidden-right-panel');
+    }
+
+    // Atualiza para ambos ocultos se necessário
+    if (body.classList.contains('hidden-left-panel') && body.classList.contains('hidden-right-panel')) {
+        body.classList.add('hidden-both-panels');
+    }
+}
+
+function openRightPanel() {
+    const body = document.body;
+    
+    // Remove a classe que oculta o painel direito, se estiver presente
+    body.classList.remove('hidden-right-panel');
+
+    // Caso ambos os painéis estivessem ocultos, remova a classe de ambos ocultos
+    body.classList.remove('hidden-both-panels');
+}

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Pedro Miguez - PGV Palotina</title>
+    <title>PGV Rural Palotina</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="modal.css">
@@ -23,9 +23,10 @@
             <img src="logo_drz.png" alt="Logo 1">
         </div>
     </div>
+    <i class="fa-solid fa-layer-group" id="toggleLeftPanelIcon" onclick="toggleLeftPanel()"></i>
     <div class="container">
         <div class="left-panel">
-            <h1 class>PGV RURAL</h1>
+            <h1 class="titulo-pgv">PGV RURAL</h1>
             <label for="opacitySlider">Transparência</label>
             <input type="range" id="opacitySlider" min="0" max="1" step="0.1" value="1">
             <div id="legendContainer">
@@ -50,8 +51,11 @@
         </div>
 
         <div class="right-panel">
-            <div id="simulador">
-                <h2>Parâmetros de Cálculo do Terreno</h2>
+            <div id="simulador">            
+                <div class="header-simulador">
+                    <i class="fa-solid fa-xmark" id="closeRightPanelIcon" onclick="toggleRightPanel()"></i>
+                    Parâmetros de Cálculo do Terreno
+                </div>
         
                 <div class="form-group row">
                     <div class="field-container small-width">
@@ -84,7 +88,7 @@
                         </select>
                     </div>
                     <div class="field-container">
-                        <label for="textura">Textura:</label>
+                        <label for="textura">Solo:</label>
                         <select id="textura">
                             <option value="0">Selecione</option>
                             <option value="1">Arenosa</option>
