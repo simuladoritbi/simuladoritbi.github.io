@@ -1,4 +1,10 @@
 // Lucas, se você está lendo isso, saiba que cada gambiarra e POG desse código nasceu da necessidade urgente de fazer esse simulador funcionar "pra ontem". Não foi por escolha, foi pela sobrevivência! :)
+function formatNumber(value) {
+    return value.toLocaleString('pt-BR', { 
+        minimumFractionDigits: 2, 
+        maximumFractionDigits: 2 
+    });
+}
 
 function showAmostraPanel(featureInfo) {
     // Ocultar o simulador e mostrar o painel de amostra
@@ -8,8 +14,8 @@ function showAmostraPanel(featureInfo) {
     // Preencher os campos da amostra com os dados da feição (featureInfo)
     document.getElementById("amostraId").textContent = featureInfo.fid || "Não disponível";
     document.getElementById("amostraArea").textContent =  featureInfo.area_ha || "Não disponível";
-    document.getElementById("amostraValorHa").textContent = featureInfo.valor_oferta_ha || "Não disponível";
-    document.getElementById("amostraValorTotal").textContent = featureInfo.valor_oferta|| "Não disponível";
+    document.getElementById("amostraValorHa").textContent = formatNumber(featureInfo.valor_oferta_ha) || "Não disponível";
+    document.getElementById("amostraValorTotal").textContent = formatNumber(featureInfo.valor_oferta)|| "Não disponível";
     document.getElementById("amostraTipoPesquisa").textContent = featureInfo.tipo_pesquisa || "Não disponível";
     document.getElementById("amostraObservacao").value = featureInfo.observacao || "";
 }

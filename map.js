@@ -1,4 +1,3 @@
-// Defina a URL do servidor WMS para a legenda
 
 // Lucas, se você está lendo isso, saiba que cada gambiarra e POG desse código nasceu da necessidade urgente de fazer esse simulador funcionar "pra ontem". Não foi por escolha, foi pela sobrevivência! :)
 
@@ -91,6 +90,9 @@ const featureInfoUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ct
 // Função para capturar feição ao clicar no mapa
 map.on('singleclick', async function (event) {
     const viewResolution = map.getView().getResolution();
+    console.log(map.getView())
+
+
 
     // Verifica se o clique foi na camada amostras_pgvr
     const urlAmostras = camadaAmostras.getSource().getFeatureInfoUrl(
@@ -113,23 +115,31 @@ map.on('singleclick', async function (event) {
                 console.log(featureInfo);
                 showAmostraPanel(featureInfo);
     
-                // Verifica se a geometria da feição está disponível
                 if (data.features[0].geometry) {
                     const format = new ol.format.GeoJSON();
-    
-                    // Cria a feição a partir da geometria
                     const feature = format.readFeature(data.features[0], {
                         dataProjection: 'EPSG:31982',
                         featureProjection: map.getView().getProjection()
                     });
-    
-                    // Calcula a extensão da geometria e ajusta o zoom
                     const extent = feature.getGeometry().getExtent();
-                    map.getView().fit(extent, {
-                        duration: 1000,
-                        maxZoom: 17,
-                        padding: [50, 50, 50, 50]
-                    });
+                    console.log(extent)
+                    const clickedCoordinates = event.coordinate;
+                    // Fiz uma POG Enorme aqui, quando clicava na pgv e depois da amostra ele mandava no meio do oceano, depois de muito tentar arrumar do modo correto e não conseguir fiz isso
+                    if (Math.abs(extent[0]) > 6207374 ) {
+                        console.log("Coordenadas inválidas. Centralizando no ponto de clique.");
+                        map.getView().animate({
+                            center: clickedCoordinates,
+                            zoom: 16,
+                            duration: 1000
+                        });
+                    } else {
+                        console.log("Coordenadas válidas para a feição.");
+                        map.getView().fit(extent, {
+                            duration: 1000,
+                            maxZoom: 17,
+                            padding: [50, 50, 50, 50]
+                        });
+                    }
                 } else {
                     console.log("A geometria da feição não está disponível.");
                 }
@@ -265,6 +275,7 @@ map.on('singleclick', async function (event) {
                     // Centraliza e dá zoom na feição selecionada
                     // Centraliza e dá zoom na feição selecionada com um fator de expansão
                     var extent = feature.getGeometry().getExtent();
+                    console.log(extent);
                     map.getView().fit(extent, { 
                         duration: 1000,   // Duração da animação de zoom em milissegundos
                         maxZoom: 17,      // Define um zoom máximo (mais longe que antes)
