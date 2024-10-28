@@ -107,50 +107,33 @@ map.on('singleclick', async function (event) {
         try {
             const response = await fetch(urlAmostras);
             const data = await response.json();
-
+    
             if (data.features && data.features.length > 0) {
                 const featureInfo = data.features[0].properties;
                 console.log(featureInfo);
                 showAmostraPanel(featureInfo);
-
-                // Obtém o ID da feição para a solicitação WFS
-                const featureId = data.features[0].id;
-                const idNumber = featureId.split('.')[1]; 
-
-                // Solicitação WFS para obter a geometria completa da feição
-                const wfsUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/ows';
-                const wfsParams = new URLSearchParams({
-                    'service': 'WFS',
-                    'version': '1.0.0',
-                    'request': 'GetFeature',
-                    'typeName': 'palotina-ctm-3:pesquisa_imobiliaria_rural',
-                    'outputFormat': 'application/json',
-                    'featureID': 'pesquisa_imobiliaria_rural.' + idNumber
-                });
-
-                const fullWfsUrl = wfsUrl + '?' + wfsParams.toString();
-                const wfsResponse = await fetch(fullWfsUrl);
-                const wfsData = await wfsResponse.json();
-
-                if (wfsData.features && wfsData.features.length > 0) {
-                    const wfsFeature = wfsData.features[0];
-                    var format = new ol.format.GeoJSON();
-
-                    var feature = format.readFeature(wfsFeature, {
-                        dataProjection: 'EPSG:31982', // Projeção original
-                        featureProjection: map.getView().getProjection() // Projeção do mapa (EPSG:3857)
+    
+                // Verifica se a geometria da feição está disponível
+                if (data.features[0].geometry) {
+                    const format = new ol.format.GeoJSON();
+    
+                    // Cria a feição a partir da geometria
+                    const feature = format.readFeature(data.features[0], {
+                        dataProjection: 'EPSG:31982',
+                        featureProjection: map.getView().getProjection()
                     });
-
-                    var extent = feature.getGeometry().getExtent();
+    
+                    // Calcula a extensão da geometria e ajusta o zoom
+                    const extent = feature.getGeometry().getExtent();
                     map.getView().fit(extent, {
                         duration: 1000,
                         maxZoom: 17,
                         padding: [50, 50, 50, 50]
                     });
-                    openRightPanel();
                 } else {
-                    console.log("Não foi possível obter a geometria da feição via WFS.");
+                    console.log("A geometria da feição não está disponível.");
                 }
+                openRightPanel();
                 return;
             } else {
                 console.log("Nenhuma feição encontrada na camada amostras_pgvr.");
@@ -159,6 +142,7 @@ map.on('singleclick', async function (event) {
             console.error("Erro ao obter dados da feição (amostras_pgvr):", error);
         }
     }
+    
 
     // Verifica se o clique foi na camada camadaPGV
     const urlPGV = camadaPGV.getSource().getFeatureInfoUrl(
@@ -287,7 +271,6 @@ map.on('singleclick', async function (event) {
                         padding: [50, 50, 50, 50] // Adiciona um "acolchoamento" ao redor da feição (topo, direita, inferior, esquerda)
                     });
                     openRightPanel();
-
                 } else {
                     console.log("Não foi possível obter a geometria da feição via WFS.");
 
