@@ -8,7 +8,7 @@ body {
 .container {
     display: grid;
     grid-template-columns: 280px 1fr 650px;
-    height: 100vh; 
+    height: calc(100vh - 80px);
     padding-top: 80px;
 }
 
