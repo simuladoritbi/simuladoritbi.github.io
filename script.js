@@ -52,3 +52,12 @@ document.getElementById("editableIndex").addEventListener("input", function() {
     }
 });
 
+function abrirPaginaAmostra() {
+    const id = document.getElementById('amostraId').innerText;
+    if (id) {
+        const url = `amostras/Amostra_${id}.pdf#toolbar=0`; // #toolbar=0 esconde a barra de ferramentas do PDF no navegador
+        window.open(url, '_blank');
+    } else {
+        alert("ID da amostra não encontrado.");
+    }
+}
