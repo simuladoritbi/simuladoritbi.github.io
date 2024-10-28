@@ -187,12 +187,13 @@ th {
 }
 
 .left-panel #legendContainer {
-    margin-top: 20px; /* Espaço antes da legenda */
-    padding-bottom: 20px; /* Espaço abaixo da legenda */
+    margin-top: 0px; /* Espaço antes da legenda */
+    padding-bottom: 0px; /* Espaço abaixo da legenda */
 }
 
 .left-panel img {
     margin-bottom: 20px; /* Espaço abaixo das imagens da legenda */
+    margin-top: -10px;
 }
 .checkbox-container {
     display: flex;

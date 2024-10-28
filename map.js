@@ -4,6 +4,7 @@
 
 const legendUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pgv_rural_imovel';
 const legendU2 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pesquisa_imobiliaria_rural';
+const legendU3 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:perimetro_urbano';
 
 var highlightedFeatureLayer = null;
 
@@ -50,10 +51,23 @@ const camadaAmostras = new ol.layer.Tile({
     visible: true  // Inicialmente, a camada está ativada
 });
 
+const perimetro = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms',
+        params: {
+            'LAYERS': 'perimetro_urbano',
+            'FORMAT': 'image/png',
+            'TRANSPARENT': true
+        }
+    }),
+    visible: true  // Inicialmente, a camada está ativada
+});
+
+
 // Cria o mapa e define o centro e o nível de zoom
 const map = new ol.Map({
     target: 'map',
-    layers: [camadaOpenStreetMap, camadaImagemRecente, camadaPGV, camadaAmostras],
+    layers: [camadaOpenStreetMap, camadaImagemRecente, camadaPGV, camadaAmostras,perimetro],
     view: new ol.View({
         center: ol.proj.fromLonLat([-53.84, -24.29]),
         zoom: 12
@@ -69,6 +83,7 @@ document.getElementById('opacitySlider').addEventListener('input', (event) => {
 // Exibir a legenda na barra lateral esquerda
 document.getElementById('layerLegend').src = legendUrl;
 document.getElementById('layerLegend2').src = legendU2;
+document.getElementById('layerLegend3').src = legendU3;
 
 // URL base para GetFeatureInfo
 const featureInfoUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms';
@@ -293,3 +308,9 @@ map.on('singleclick', async function (event) {
 document.getElementById('amostrasCheckbox').addEventListener('change', function () {
     camadaAmostras.setVisible(this.checked);
 });
+
+// Controle de visibilidade da camada com checkbox
+document.getElementById('perimetroCheckbox').addEventListener('change', function () {
+    perimetro.setVisible(this.checked);
+});
+

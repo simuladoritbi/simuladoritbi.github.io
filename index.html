@@ -29,15 +29,18 @@
             <label for="opacitySlider">Transparência</label>
             <input type="range" id="opacitySlider" min="0" max="1" step="0.1" value="1">
             <div id="legendContainer">
-                <h2>Legenda</h2>
+                <h2>Legenda (R$/ha)</h2>
                 <img id="layerLegend" src="" alt="Legenda da camada valores_reg_final">
             </div>
-            <input type="checkbox" id="amostrasCheckbox" value="1" checked>
-            <h1 for="amostrasCheckbox" style="display: inline-block; margin-right: 10px;">Levantamento Imobiliário</h1>
-                       
+            <div id="legendContainer">
+            <input type="checkbox" id="perimetroCheckbox" value="1" checked>
+            <h1 for="perimetroCheckbox" style="display: inline-block; margin-right: 10px;">Perímetro urbano</h1>
+            <img id="layerLegend3" src="" alt="Legenda da camada valores_reg_final">
+            </div>                            
             
             <div id="legendContainer">
-                <h2>Legenda</h2>
+                <input type="checkbox" id="amostrasCheckbox" value="1" checked>
+                <h1 for="amostrasCheckbox" style="display: inline-block; margin-right: 10px;">Levantamento Imobiliário</h1>
                 <img id="layerLegend2" src="" alt="Legenda da camada valores_reg_final">
             </div>
         </div>
