@@ -44,6 +44,7 @@ iframe {
     gap: 8px; /* Aumenta o espaçamento horizontal entre os campos */
     margin-bottom: 10px;
     padding: 10px;
+    flex-wrap: wrap; 
 }
 
 
@@ -69,7 +70,7 @@ iframe {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
-    min-width: 150px; /* Define uma largura mínima para garantir espaçamento adequado */
+    min-width: 50px; /* Define uma largura mínima para garantir espaçamento adequado */
 }
 
 
@@ -78,6 +79,7 @@ h2 {
     color: #007bff;
     margin-top: 20px;
     margin-bottom: 10px;
+    margin-left: 15px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
 }
@@ -181,4 +183,34 @@ body {
 
 .export-button:hover {
     background-color: #0056b3;
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding-left: 0;
+        gap: 0;
+        height: auto;
+        width: 100%;
+    }
+
+    .left-panel {
+        width: 98svh;
+        box-shadow: none;
+    }
+    .form-row {
+        flex-direction: column; /* Stack form groups vertically */
+        align-items: stretch;
+    }
+    .form-group {
+        width: 100%; /* Full width for form groups */
+    }
+
+    .right-panel {
+        display: none;
+    }
+    .form-group input[type="text"],
+    .form-group select {
+        width: 100%; /* Inputs take full width */
+        min-width: 10; /* Allow shrinking */
+    }
 }

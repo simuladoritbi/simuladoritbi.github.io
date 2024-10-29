@@ -1,9 +1,17 @@
 
 // Lucas, se você está lendo isso, saiba que cada gambiarra e POG desse código nasceu da necessidade urgente de fazer esse simulador funcionar "pra ontem". Não foi por escolha, foi pela sobrevivência! :)
 
+
+
+
 const legendUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pgv_rural_imovel';
 const legendU2 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pesquisa_imobiliaria_rural';
 const legendU3 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:perimetro_urbano';
+
+
+function isMobileDevice() {
+    return document.documentElement.clientWidth <= 768;
+}
 
 var highlightedFeatureLayer = null;
 
@@ -143,7 +151,13 @@ map.on('singleclick', async function (event) {
                 } else {
                     console.log("A geometria da feição não está disponível.");
                 }
-                openRightPanel();
+                // Adicione o setTimeout para abrir o painel direito apenas no mobile
+                if (isMobileDevice()) {
+                    setTimeout(() => openRightPanel(), 1500); // Atraso de 2 segundos no mobile
+                } else {
+                    openRightPanel(); // Abre imediatamente no desktop
+                }
+
                 return;
             } else {
                 console.log("Nenhuma feição encontrada na camada amostras_pgvr.");
@@ -281,7 +295,13 @@ map.on('singleclick', async function (event) {
                         maxZoom: 17,      // Define um zoom máximo (mais longe que antes)
                         padding: [50, 50, 50, 50] // Adiciona um "acolchoamento" ao redor da feição (topo, direita, inferior, esquerda)
                     });
-                    openRightPanel();
+                    // Adicione o setTimeout para abrir o painel direito apenas no mobile
+                if (isMobileDevice()) {
+                    setTimeout(() => openRightPanel(), 1500); // Atraso de 2 segundos no mobile
+                } else {
+                    openRightPanel(); // Abre imediatamente no desktop
+                }
+
                 } else {
                     console.log("Não foi possível obter a geometria da feição via WFS.");
 
@@ -309,7 +329,7 @@ document.getElementById('amostrasCheckbox').addEventListener('change', function 
 document.getElementById('perimetroCheckbox').addEventListener('change', function () {
     perimetro.setVisible(this.checked);
 });
-
+/*
 function toggleLeftPanel() {
     const body = document.body;
 
@@ -331,7 +351,31 @@ function toggleLeftPanel() {
         body.classList.add('hidden-both-panels');
     }
 }
+*/
+function toggleLeftPanel() {
+    const body = document.body;
 
+    if (body.classList.contains('hidden-left-panel')) {
+        // Mostrar o painel esquerdo
+        body.classList.remove('hidden-left-panel');
+
+        // No mobile, fechar o painel direito ao abrir o esquerdo
+        if (isMobileDevice()) {
+            body.classList.add('hidden-right-panel');
+        }
+    } else {
+        // Ocultar o painel esquerdo
+        body.classList.add('hidden-left-panel');
+    }
+
+    // Atualizar classe para ambos ocultos se necessário
+    if (body.classList.contains('hidden-left-panel') && body.classList.contains('hidden-right-panel')) {
+        body.classList.add('hidden-both-panels');
+    } else {
+        body.classList.remove('hidden-both-panels');
+    }
+}
+/*
 function toggleRightPanel() {
     const body = document.body;
 
@@ -353,12 +397,41 @@ function toggleRightPanel() {
         body.classList.add('hidden-both-panels');
     }
 }
+*/
+
+function toggleRightPanel() {
+    const body = document.body;
+
+    if (body.classList.contains('hidden-right-panel')) {
+        // Mostrar o painel direito
+        body.classList.remove('hidden-right-panel');
+
+        // No mobile, fechar o painel esquerdo ao abrir o direito
+        if (isMobileDevice()) {
+            body.classList.add('hidden-left-panel');
+        }
+    } else {
+        // Ocultar o painel direito
+        body.classList.add('hidden-right-panel');
+    }
+
+    // Atualizar classe para ambos ocultos se necessário
+    if (body.classList.contains('hidden-left-panel') && body.classList.contains('hidden-right-panel')) {
+        body.classList.add('hidden-both-panels');
+    } else {
+        body.classList.remove('hidden-both-panels');
+    }
+}
 
 function openRightPanel() {
     const body = document.body;
     
     // Remove a classe que oculta o painel direito, se estiver presente
     body.classList.remove('hidden-right-panel');
+
+    if (isMobileDevice()) {
+        body.classList.add('hidden-left-panel');
+    }
 
     // Caso ambos os painéis estivessem ocultos, remova a classe de ambos ocultos
     body.classList.remove('hidden-both-panels');
