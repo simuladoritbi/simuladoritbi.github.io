@@ -34,7 +34,7 @@ function updateBenfeitoriasCount() {
     if (tbody) {
         numBenfeitorias = tbody.rows.length -1 ;
         if (numBenfeitorias > 0){
-            benfeitoriasCountSpan.textContent = `(${numBenfeitorias} benfeitorias encontradas)`;
+            benfeitoriasCountSpan.textContent = `(benfeitorias encontradas)`;
         }
         else{
             benfeitoriasCountSpan.textContent = ``;
