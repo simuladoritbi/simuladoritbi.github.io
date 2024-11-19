@@ -45,7 +45,7 @@ function updateFilteredWFSData(cqlFilter) {
 
 function applyWFSFilterById(id) {
     const cqlFilter = `id = '${id}'`;  // Criar o filtro CQL para o campo 'id'
-    updateFilteredWFSData(cqlFilter);  // Chamar a função passando o filtro
+    //updateFilteredWFSData(cqlFilter);  // Chamar a função passando o filtro
 }
 
 // Quando a página carregar, aplicar o filtro com o amostraId
