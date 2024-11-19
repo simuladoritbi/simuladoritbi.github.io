@@ -17,7 +17,7 @@ function populateSimuladorPanel(featureInfo) {
     document.getElementById("valorHa").value = featureInfo.valor_terreno_ha.toFixed(2).replace('.', ',') || "Não disponível";
     document.getElementById("localizacao").value = featureInfo.localizacao_nota || "0";
     document.getElementById("acesso").value = featureInfo.avp_nota || "0";
-    document.getElementById("textura").value = featureInfo.solo_nota || "0";
+    document.getElementById("textura").value = featureInfo.textura_nota || "0";
     
     // Definição dos índices
     const i_urbano = featureInfo.i_urbano || 1;

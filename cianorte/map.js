@@ -279,7 +279,7 @@ map.on('singleclick', async function (event) {
                     var source = camadaPGV.getSource();
 
                     // Ajuste 'id' para corresponder ao nome da propriedade no seu conjunto de dados
-                    var cqlFilter = 'id <> ' + idNumber; // Use aspas se o ID for string: 'id <> \'' + idNumber + '\''
+                    var cqlFilter = 'fid <> ' + idNumber; // Use aspas se o ID for string: 'id <> \'' + idNumber + '\''
 
                     // Atualiza os parâmetros da fonte
                     source.updateParams({

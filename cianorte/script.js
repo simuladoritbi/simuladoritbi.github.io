@@ -3,10 +3,12 @@
 // Função para calcular o valor do hectare (valorHa)
 function calculateValorHa(avpNota, localizacaoNota, texturaNota) {
     console.log(avpNota, localizacaoNota, texturaNota);
-    return (0.9*(1/((9.422 * Math.pow(10, -6)) -
-           (9.43247 * Math.pow(10, -8) * avpNota) -
-           (1.322 * Math.pow(10, -7) * localizacaoNota) +
-           (5.2687 * Math.pow(10, -6) / texturaNota))));
+    return 1 / (
+        (8.2858 * Math.pow(10, -6)) +
+        (1.7597 * Math.pow(10, -5) / avpNota) -
+        (2.8458 * Math.pow(10, -7) * localizacaoNota) +
+        (1.3515 * Math.pow(10, -5) / texturaNota)
+    );
 }
 // Função para obter o valor numérico selecionado de cada campo select
 function getSelectedValue(selectId) {
