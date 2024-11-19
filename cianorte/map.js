@@ -24,7 +24,7 @@ const camadaOpenStreetMap = new ol.layer.Tile({
 // Define as camadas do mapa
 const camadaImagemRecente = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms',
+        url: 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wms',
         params: {
             'LAYERS': 'imagem_recente',
             'FORMAT': 'image/png',
@@ -35,9 +35,9 @@ const camadaImagemRecente = new ol.layer.Tile({
 
 const camadaPGV = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms',
+        url: 'https://pedromiguez.com.br/geoserver/wms',
         params: {
-            'LAYERS': 'pgv_rural_imovel',
+            'LAYERS': '	drz:pgv_rural_imovel',
             'FORMAT': 'image/png',
             'TRANSPARENT': true
         }
@@ -48,9 +48,9 @@ const camadaPGV = new ol.layer.Tile({
 // Define a camada amostras_pgvr
 const camadaAmostras = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms',
+        url: 'https://pedromiguez.com.br/geoserver/wms',
         params: {
-            'LAYERS': 'pesquisa_imobiliaria_rural',
+            'LAYERS': '	drz:pesquisa_imobiliaria_rural',
             'FORMAT': 'image/png',
             'TRANSPARENT': true
         }
@@ -60,7 +60,7 @@ const camadaAmostras = new ol.layer.Tile({
 
 const perimetro = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-        url: 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms',
+        url: 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wms',
         params: {
             'LAYERS': 'perimetro_urbano',
             'FORMAT': 'image/png',
@@ -76,8 +76,8 @@ const map = new ol.Map({
     target: 'map',
     layers: [camadaOpenStreetMap, camadaImagemRecente, camadaPGV, camadaAmostras,perimetro],
     view: new ol.View({
-        center: ol.proj.fromLonLat([-53.84, -24.29]),
-        zoom: 12
+        center: ol.proj.fromLonLat([-52.62051, -23.73390]),
+        zoom: 11.3
     })
 });
 
@@ -93,7 +93,7 @@ document.getElementById('layerLegend2').src = legendU2;
 document.getElementById('layerLegend3').src = legendU3;
 
 // URL base para GetFeatureInfo
-const featureInfoUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms';
+const featureInfoUrl = 'https://pedromiguez.com.br/geoserver/wms';
 
 // Função para capturar feição ao clicar no mapa
 map.on('singleclick', async function (event) {
@@ -109,7 +109,7 @@ map.on('singleclick', async function (event) {
         'EPSG:3857',
         {
             'INFO_FORMAT': 'application/json',
-            'QUERY_LAYERS': 'pesquisa_imobiliaria_rural'
+            'QUERY_LAYERS': 'drz:pesquisa_imobiliaria_rural'
         }
     );
 
@@ -175,7 +175,7 @@ map.on('singleclick', async function (event) {
         'EPSG:3857',
         {
             'INFO_FORMAT': 'application/json',
-            'QUERY_LAYERS': 'pgv_rural_imovel',
+            'QUERY_LAYERS': 'drz:pgv_rural_imovel',
             'FEATURE_COUNT': 1
         }
     );
@@ -196,12 +196,12 @@ map.on('singleclick', async function (event) {
                 populateTableWithFeatureInfo(featureInfo, idNumber);
 
                 // Agora, fazemos uma solicitação WFS GetFeature para obter a geometria completa
-                const wfsUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/ows';
+                const wfsUrl = 'https://pedromiguez.com.br/geoserver/ows';
                 const wfsParams = new URLSearchParams({
                     'service': 'WFS',
                     'version': '1.0.0',
                     'request': 'GetFeature',
-                    'typeName': 'palotina-ctm-3:pgv_rural_imovel',
+                    'typeName': 'drz:pgv_rural_imovel',
                     'outputFormat': 'application/json',
                     'featureID': 'pgv_rural_imovel.' + idNumber // Ajuste o prefixo conforme necessário
                 });
