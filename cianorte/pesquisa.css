@@ -1,0 +1,81 @@
+/* Todo esse CSS foi gerado com a ajuda do ChatGPT porque, sinceramente, eu odeio frontend do fundo do meu coração. */
+
+#amostra {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    display: none; /* Escondido por padrão */
+}
+
+#amostra h2 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+#amostra .form-group.row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+#amostra .field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#amostra .field-container label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#amostra .field-container span {
+    font-size: 14px;
+    color: #333;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#amostra .field-container textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    resize: none;
+}
+.button-style {
+    margin-top: 20px;
+    background-color: #034179;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+#voltarSimuladorButton:hover {
+    background-color: #1b0066;
+}
