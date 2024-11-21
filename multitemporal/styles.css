@@ -1,0 +1,164 @@
+/* Estilo base da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    overflow: hidden; /* Impede o scroll da página */
+}
+
+/* Container principal */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    height: 100vh;
+}
+
+/* Painel esquerdo e direito com scroll */
+.left-panel, .right-panel {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow-y: auto; /* Scroll vertical apenas nas barras laterais */
+}
+
+/* Mapa */
+.map {
+    width: 100%;
+    height: 100%;
+    background-color: #e8e8e8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para as tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Estilo do slider */
+.slider-container {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 40%;
+    text-align: center;
+}
+
+#layerSlider {
+    width: 80%;
+    cursor: pointer;
+}
+
+#sliderLabel {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo para os gráficos (painel esquerdo) */
+.left-panel canvas {
+    margin-bottom: 20px;
+}
+
+/* Popup estilo mais moderno */
+.ol-popup {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#clearFilterButton {
+    background: linear-gradient(135deg, #cbcad6, #8a8c8f); /* Gradiente moderno */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px; /* Espaçamento entre o botão e os gráficos */
+    transition: background 0.3s, transform 0.3s; /* Efeito de transição suave */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+#clearFilterButton:hover {
+    background: linear-gradient(135deg, #c1cad3, #a7a6ac); /* Inverter gradiente no hover */
+    transform: translateY(-2px); /* Elevar o botão levemente ao passar o mouse */
+}
+
+.export-button {
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.export-button:hover {
+    color: #0056b3;
+}
+
+.fa-file-excel {
+    color: #28a745;
+}
+
+.fa-file-excel:hover {
+    color: #218838;
+}
+
+.fa-file-csv {
+    color: #007bff;
+}
+
+.fa-file-csv:hover {
+    color: #0056b3;
+}
+#sliderButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#sliderButton:hover {
+    background-color: #45a049;
+}
+
+#sliderButton:active {
+    background-color: #3e8e41;
+}
+.professional-title {
+    font-family: 'Arial', sans-serif; /* Usar uma fonte limpa e moderna */
+    font-size: 24px; /* Tamanho da fonte para ser legível */
+    font-weight: bold; /* Negrito para dar ênfase */
+    color: #2c3e50; /* Cor profissional: azul escuro */
+    text-align: center; /* Centralizar o texto */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+    text-transform: uppercase; /* Coloca o texto em letras maiúsculas */
+    letter-spacing: 1.5px; /* Adiciona espaçamento entre as letras */
+}

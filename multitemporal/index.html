@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedro Miguez - Dashboard Interativo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1 class="professional-title">Uso Multitemporal de Cianorte</h1>
+            <button id="clearFilterButton">Limpar Filtro</button>
+            <div class="chartsContainer">
+                <!-- Gráficos serão inseridos aqui -->
+            </div>
+            <!-- Gráficos serão inseridos aqui -->
+        </div>
+        
+        <div id="map" class="map">
+            <!-- Mapa será inserido aqui -->
+        </div>
+        <div class="right-panel">
+            <!-- Tabelas serão inseridas aqui -->
+        </div>
+    </div>
+
+    <!-- Slider para as camadas -->
+    <div class="slider-container">
+        <input type="range" id="layerSlider" min="0" max="2" value="0">
+        <label id="sliderLabel">Safra 21/22 Verão</label>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
