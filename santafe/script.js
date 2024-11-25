@@ -4,10 +4,10 @@
 function calculateValorHa(avpNota, localizacaoNota, texturaNota) {
     console.log(avpNota, localizacaoNota, texturaNota);
     return 1 / (
-        (9.3854e-6) +
-        (2.0279e-5 / avpNota) -
-        (1.8072e-7 * localizacaoNota) +
-        (4.7406e-6 / texturaNota)
+        (9.3854 * Math.pow(10, -6)) +
+        (2.0279 * Math.pow(10, -5) / avpNota) -
+        (1.8072 * Math.pow(10, -7) * localizacaoNota) +
+        (4.7406 * Math.pow(10, -6) / texturaNota)
     );
 }
 // Função para obter o valor numérico selecionado de cada campo select
