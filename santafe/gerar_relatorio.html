@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Resultados e Documento</title>
+    <link rel="stylesheet" href="relatorio.css">
+</head>
+<body>
+    
+        <div class="header-container">
+        <div class="logo-container">
+            <img src="logo_santafe.png" alt="Logo 1">
+        </div>
+        <div class="title-container">
+            <h2>Prefeitura de Santa Fé</h2>
+            <h3>Guia de ITBI</h3>
+        </div>
+        <div class="logo-containerdir">
+            <img src="logo_drz.png" alt="Logo 1">
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Lado esquerdo com os resultados da simulação -->
+        <div class="left-panel">
+    
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px;">
+                <div>
+                    <label>Identificador (PGVR):</label>
+                    <span id="amostraId"></span>
+                </div>
+                <button id="exportButton" class="export-button">Exportar</button>
+            </div>
+            
+
+            <table id="simulacoesTable" class="simulacoes-table">
+                <thead>
+                    <tr>
+                        <th>Exportar</th> 
+                        <th>Valor do Terreno</th>
+                        <th>Valor das Benfeitorias</th>
+                        <th>Valor Venal do Imóvel</th>
+                        <th>ITBI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dados da simulação serão inseridos aqui -->
+                </tbody>
+            </table>
+
+            <!-- Cadastro e Informações -->
+            <h2>Cadastro e Informações</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Cadastro:</label>
+                    <input type="text" id="cadastro">
+                </div>
+                <div class="form-group">
+                    <label>Tipo Imóvel:</label>
+                    <input type="text" id="TipoImovel">
+                </div>
+                <div class="form-group">
+                    <label>Cadastro Anterior:</label>
+                    <input type="text" id="cadastroAnterior">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Distrito:</label>
+                    <input type="text" id="distrito">
+                </div>
+                <div class="form-group">
+                    <label>Setor:</label>
+                    <input type="text" id="setor">
+                </div>
+                <div class="form-group">
+                    <label>Quadra Inscrição:</label>
+                    <input type="text" id="quadraInscricao">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Lote Inscrição:</label>
+                    <input type="text" id="loteInscricao">
+                </div>
+                <div class="form-group">
+                    <label>Unidade:</label>
+                    <input type="text" id="unidade">
+                </div>
+                <div class="form-group">
+                    <label>Quadra Fiscal:</label>
+                    <input type="text" id="quadraFiscal">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Lote Fiscal:</label>
+                    <input type="text" id="loteFiscal">
+                </div>
+                <div class="form-group">
+                    <label>Inscrição Imobiliária:</label>
+                    <input type="text" id="inscricaoImobiliaria">
+                </div>
+            </div>
+
+            <!-- Localização -->
+            <h2>Localização</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Logradouro:</label>
+                    <input type="text" id="logradouro">
+                </div>
+                <div class="form-group">
+                    <label>Complemento:</label>
+                    <input type="text" id="complemento">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bairro:</label>
+                    <input type="text" id="bairro">
+                </div>
+                <div class="form-group">
+                    <label>Loteamento:</label>
+                    <input type="text" id="loteamento">
+                </div>
+            </div>
+
+            <!-- Informações Burocráticas -->
+            <h2>Informações Burocráticas</h2>
+            <div class="form-row">
+                <div class="form-group" >
+                    <label>Matrícula:</label>
+                    <input type="text" id="matricula">
+                </div>
+                <div class="form-group" >
+                    <label>Cartório:</label>
+                    <input type="text" id="cartorio" value="CNS 08.595-1">
+                </div>
+                <div class="form-group"style="flex: 0.10;">
+                    <label>Livro:</label>
+                    <input type="text" id="livro">
+                </div>
+                <div class="form-group"style="flex: 0.10;">
+                    <label>Folha:</label>
+                    <input type="text" id="folha">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>INCRA:</label>
+                    <input type="text" id="incra">
+                </div>
+                <div class="form-group">
+                    <label>Caucionado:</label>
+                    <select id="caucionado">
+                        <option value="Não" selected>Não</option>
+                        <option value="Sim">Sim</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ano Alíquota Progressiva:</label>
+                    <input type="text" id="anoAliquotaProgressiva">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"style="flex: 0.75;">
+                    <label>CAR:</label>
+                    <input type="text" id="car">
+                </div>
+                <div class="form-group" style="flex: 0.15;">
+                    <label>Área (ha):</label>
+                    <input type="text" id="areaha">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Data de Inclusão:</label>
+                    <input type="text" id="dataInclusao">
+                </div>
+                <div class="form-group">
+                    <label>Data de Alteração:</label>
+                    <input type="text" id="dataAlteracao">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Lote:</label>
+                    <input type="text" id="tipoLote" value="Rural">
+                </div>
+            </div>
+
+            <!-- Proprietários -->
+            <h2>Proprietários</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Proprietário:</label>
+                    <input type="text" id="proprietario">
+                </div>
+                <div class="form-group">
+                    <label>Compromissário Principal:</label>
+                    <input type="text" id="compromissarioPrincipal">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>CPF/CNPJ:</label>
+                    <input type="text" id="cpfCnpj">
+                </div>
+                <div class="form-group">
+                    <label>RG:</label>
+                    <input type="text" id="rg">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Pessoa:</label>
+                    <select id="tipoPessoa">
+                        <option value="Física">Física</option>
+                        <option value="Jurídica">Jurídica</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group"style="flex: 0.85;">
+                    <label>Endereço:</label>
+                    <input type="text" id="endereco">
+                </div>
+                <div class="form-group" style="flex: 0.15;">
+                    <label>Bairro:</label>
+                    <input type="text" id="bairropro">
+                </div>
+    
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Complemento:</label>
+                    <input type="text" id="complementoProprietario">
+                </div>
+                <div class="form-group"style="flex: 0.15;">
+                    <label>Cep:</label>
+                    <input type="text" id="cep">
+                </div>
+                <div class="form-group"style="flex: 0.15;">
+                    <label>Cidade:</label>
+                    <input type="text" id="cidade" value="Palotina/PR">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contato:</label>
+                    <input type="text" id="contato">
+                </div>
+                <div class="form-group">
+                    <label>E-mail:</label>
+                    <input type="text" id="email">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Telefone Residencial:</label>
+                    <input type="text" id="telResidencial">
+                </div>
+                <div class="form-group">
+                    <label>Telefone Celular:</label>
+                    <input type="text" id="telCelular">
+                </div>
+                <div class="form-group">
+                    <label>Telefone Comercial:</label>
+                    <input type="text" id="telComercial">
+                </div>
+            </div>
+            <!-- Isenções -->
+            <h2>Isenções</h2>
+            <div class="form-row"> 
+                <div class="form-group" style="flex: 0.15;">
+                    <label>Código (Isenção):</label>
+                    <input type="text" id="codigoIsencao">
+                </div>
+                <div class="form-group" style="flex: 0.85;">
+                    <label>Isenção:</label>
+                    <input type="text" id="isencao">
+                </div>
+            </div>            
+            <h2>Observações</h2>
+            <div class="form-row">
+                <div class="form-group" style="flex: 1;">
+                    <label>Observação:</label>
+                    <input type="text" id="observacao">
+                </div>
+            </div>
+
+            <!-- Notas de Rodapé -->
+            <h2>Notas de Rodapé</h2>
+            <div class="form-group" style="flex: 1;">
+                <label>Notas de Rodapé:</label>
+                <textarea id="notasRodape" rows="3" style="width: 98%; padding: 5px; font-size: 12px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9;"></textarea>
+            </div>
+
+        </div>
+
+        <!-- Lado direito com visualizador PDF -->
+        <div class="right-panel" id="viewerContainer">
+            <iframe id="pdfViewer"></iframe>
+        </div>
+    </div>
+
+    <!-- Include PDF-LIB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    <script src="relatorio.js"></script>
+</body>
+</html>

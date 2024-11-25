@@ -1,0 +1,290 @@
+/* Todo esse CSS foi gerado com a ajuda do ChatGPT porque, sinceramente, eu odeio frontend do fundo do meu coração. */
+
+#simulador {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#simulador h2 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+#simulador h3 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-group.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+#acesso {
+    width: 120%;
+}
+
+.field-container label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.field-container input[type="text"],
+.field-container select {
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center; /* Centraliza o texto nos inputs e selects */
+}
+.field-container.small-width input[type="text"] {
+    width: 70%; /* Ajuste conforme o comprimento desejado */
+}
+.field-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 8px 10px;
+}
+
+.benfeitorias-section {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.benfeitorias-section h2 {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+.add-button,.exportar-button,
+.add-simulacao-button {
+    background-color: #034179; /* Mesma cor azul-escura */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-button:hover,.exportar-button:hover,
+.add-simulacao-button:hover {
+    background-color: #1b0066; /* Verde ao passar o mouse */
+}
+
+
+.benfeitorias-table,
+.simulacoes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.85em; /* Mesmo tamanho da fonte da tabela de simulação */
+}
+
+.benfeitorias-table th,
+.benfeitorias-table td,
+.simulacoes-table th,
+.simulacoes-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.benfeitorias-table th,
+.simulacoes-table th {
+    background-color: #e0e0e0; /* Cinza claro para ambos */
+    color: #555;
+    font-weight: bold;
+}
+
+.indices-section {
+    background-color: #f9f9f9;
+    padding: 0px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.indices-section h2 {
+    font-size: 1.5em;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.checkbox-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    gap: 20px;
+    font-size: 0.9em;
+}
+
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaçamento entre o checkbox e o texto */
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin: 0; /* Remove margens ao redor do checkbox */
+}
+
+.percent-indicator {
+    display: none; /* Escondido por padrão */
+    font-size: 0.85em;
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.percent-indicator.positive {
+    color: green;
+}
+
+.percent-indicator.negative {
+    color: red;
+}
+
+.checkbox-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Efeitos para alterar o percentual e mostrar cores */
+input[type="checkbox"]:checked + label + .percent-indicator.positive {
+    display: inline;
+    color: green;
+}
+
+input[type="checkbox"]:checked + label + .percent-indicator.negative {
+    display: inline;
+    color: red;
+}
+
+/* Alíquota e Simulação */
+.aliquota-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.aliquota-section label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.aliquota-section input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.simulacoes-table th, .simulacoes-table td {
+    border: 1px solid #ccc; /* Cinza claro */
+    padding: 8px;
+    text-align: center;
+    font-size: 0.85em; /* Reduz o tamanho da fonte nas células */
+}
+
+.simulacoes-table th {
+    background-color: #e0e0e0; /* Cinza mais claro para o cabeçalho */
+    color: #555; /* Cinza escuro */
+    font-weight: bold;
+}
+
+/* Estilo para o ícone de exclusão */
+.delete-icon {
+    color: #e74c3c;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.delete-icon:hover {
+    color: #c0392b; /* Cor mais escura ao passar o mouse */
+}
+
+/* Estilo básico do input */
+#editableIndex {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.85em;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave para a mudança de cor */
+}
+
+/* Verde para valores positivos */
+#editableIndex.positive {
+    background-color: #e0f7e9;
+    color: green;
+}
+
+/* Vermelho para valores negativos */
+#editableIndex.negative {
+    background-color: #f8d7da;
+    color: red;
+}
+
+/* Mensagem de aviso escondida por padrão */
+.warning-message {
+    display: none;
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+

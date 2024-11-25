@@ -50,19 +50,6 @@ var usoLayers = [
 
 // Camada de uso do solo inicial
 
-var orthoLayer = new ol.layer.Tile({
-    source: new ol.source.TileWMS({
-        url: 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wms',
-        params: {
-            'LAYERS': usoLayers[0].orthoLayer, // Inicializando com a primeira ortofoto
-            'TILED': true,
-            'FORMAT': 'image/png'
-        },
-        serverType: 'geoserver'
-    })
-});
-
-
 var usoLayer = new ol.layer.Tile({
     source: new ol.source.TileWMS({
         url: 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wms',
@@ -74,6 +61,20 @@ var usoLayer = new ol.layer.Tile({
         serverType: 'geoserver'
     })
 });
+
+var orthoLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wms',
+        params: {
+            'LAYERS': usoLayers[0].orthoLayer,
+            'TILED': true,
+            'FORMAT': 'image/png'
+        },
+        serverType: 'geoserver'
+    })
+});
+
+
 
 // Inicialização do mapa
 var map = new ol.Map({
@@ -103,7 +104,8 @@ var wfsUrl = 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wfs?' 
     'service=WFS&version=1.0.0&request=GetFeature' +
     '&typeName=uso_ocupacao_solo_10_12_2022' +
     '&outputFormat=application/json' +
-    '&propertyName=' + propertyNames.join(',');
+    '&propertyName=' + propertyNames.join(',') +
+    '&_dc=' + Date.now(); // Adiciona timestamp para evitar cache
 
 // Função para carregar os dados
 fetch(wfsUrl)
@@ -248,7 +250,7 @@ document.getElementById('layerSlider').addEventListener('input', function() {
 function updateWFSData(layerName, cqlFilter = currentCQLFilter) {
     var wfsUrl = 'https://plataforma.nacidade.com.br/geoserver/cianorte-ctm-3/wfs?' +
         'service=WFS&version=1.0.0&request=GetFeature' +
-        '&typeName=' + layerName + // Modificar a camada conforme o slider
+        '&typeName=' + layerName +
         '&outputFormat=application/json' +
         '&propertyName=' + propertyNames.join(',');
 
@@ -344,9 +346,15 @@ function clearFilter() {
         'CQL_FILTER': currentCQLFilter // Remove o filtro
     });
 
+    // Invalida o cache dos tiles e força a recarga
+    usoLayer.getSource().setKey(Date.now().toString());
+    usoLayer.getSource().refresh();
+
     // Atualiza os gráficos e tabelas sem o filtro aplicado
     updateWFSData(usoLayer.getSource().getParams().LAYERS, currentCQLFilter);
 }
+
+
 
 // Adiciona o listener para o botão de limpar filtro
 document.getElementById('clearFilterButton').addEventListener('click', function() {
@@ -464,19 +472,22 @@ function updateLayer(index) {
             'LAYERS': selectedLayer.layerName,
             'CQL_FILTER': currentCQLFilter
         });
-        usoLayer.getSource().refresh();
+        usoLayer.getSource().setKey(Date.now().toString()); // Invalida o cache dos tiles
+        usoLayer.getSource().refresh(); // Força a recarga dos tiles
     }
     
     if (orthoLayer.getSource().getParams().LAYERS !== selectedLayer.orthoLayer) {
         orthoLayer.getSource().updateParams({
             'LAYERS': selectedLayer.orthoLayer
         });
-        orthoLayer.getSource().refresh();
+        orthoLayer.getSource().setKey(Date.now().toString()); // Invalida o cache dos tiles
+        orthoLayer.getSource().refresh(); // Força a recarga dos tiles
     }
 
     document.getElementById('sliderLabel').innerText = selectedLayer.date;
     updateWFSData(selectedLayer.layerName, currentCQLFilter);
 }
+
 
 
 // Atualizando a criação de gráficos para utilizar cores
