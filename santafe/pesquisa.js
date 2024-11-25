@@ -12,7 +12,7 @@ function showAmostraPanel(featureInfo) {
     document.getElementById('amostra').style.display = 'block';
 
     // Preencher os campos da amostra com os dados da feição (featureInfo)
-    document.getElementById("amostraId").textContent = featureInfo.fid || "Não disponível";
+    document.getElementById("amostraId").textContent = featureInfo.amostra || "Não disponível";
     document.getElementById("amostraArea").textContent =  featureInfo.area_ha || "Não disponível";
     document.getElementById("amostraValorHa").textContent = formatNumber(featureInfo.valor_oferta_ha) || "Não disponível";
     document.getElementById("amostraValorTotal").textContent = formatNumber(featureInfo.valor_oferta)|| "Não disponível";

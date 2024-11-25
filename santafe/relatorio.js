@@ -45,7 +45,7 @@ function updateFilteredWFSData(cqlFilter) {
 
 function applyWFSFilterById(id) {
     const cqlFilter = `id = '${id}'`;  // Criar o filtro CQL para o campo 'id'
-    //updateFilteredWFSData(cqlFilter);  // Chamar a função passando o filtro
+    updateFilteredWFSData(cqlFilter);  // Chamar a função passando o filtro
 }
 
 // Quando a página carregar, aplicar o filtro com o amostraId
@@ -123,8 +123,8 @@ async function editPdf() {
     });
 
     firstPage.drawText(getInputValue('cadastro'), {
-        x: 239,
-        y: pageHeight - 138,
+        x: 157,
+        y: pageHeight - 137,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
@@ -147,24 +147,24 @@ async function editPdf() {
     });
 
     firstPage.drawText(getInputValue('distrito'), {
-        x: 170,
-        y: pageHeight - 152,
+        x: 120,
+        y: pageHeight - 151,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
     });
 
     firstPage.drawText(getInputValue('setor'), {
-        x: 210,
-        y: pageHeight - 152,
+        x: 190,
+        y: pageHeight - 151,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
     });
 
     firstPage.drawText(getInputValue('quadraInscricao'), {
-        x: 310,
-        y: pageHeight - 152,
+        x: 300,
+        y: pageHeight - 151,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
@@ -172,22 +172,22 @@ async function editPdf() {
 
     firstPage.drawText(getInputValue('loteInscricao'), {
         x: 400,
-        y: pageHeight - 152,
+        y: pageHeight - 151,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
     });
     firstPage.drawText(getInputValue('loteInscricao'), {
         x: 400,
-        y: pageHeight - 152,
+        y: pageHeight - 151,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
     });
 
     firstPage.drawText(getInputValue('unidade'), {
-        x: 468,
-        y: pageHeight - 152,
+        x: 485,
+        y: pageHeight - 151,
         size: 10.7,
         font: timesRomanFont,
         color: PDFLib.rgb(0, 0, 0),  // Cor preta
