@@ -27,7 +27,7 @@ function preencherFormulario(data) {
 }
 
 function updateFilteredWFSData(cqlFilter) {
-    var wfsUrl = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wfs?' +
+    var wfsUrl = 'https://plataforma.nacidade.com.br/geoserver/santafe-ctm-3/wfs?' +
         'service=WFS&version=1.0.0&request=GetFeature' +
         '&typeName=' + 'imovel_rural'+ // Camada atual do WFS
         '&outputFormat=application/json' +

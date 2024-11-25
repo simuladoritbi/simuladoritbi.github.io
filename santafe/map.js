@@ -4,9 +4,9 @@
 
 
 
-const legendUrl = 'https://pedromiguez.com.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.3.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=drz:pgv_rural_imovel_santafe';
-const legendU2 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.3.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pesquisa_imobiliaria_rural';
-const legendU3 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.3.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:perimetro_urbano';
+const legendUrl = 'https://pedromiguez.com.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=drz:pgv_rural_imovel_santafe';
+const legendU2 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:pesquisa_imobiliaria_rural';
+const legendU3 = 'https://plataforma.nacidade.com.br/geoserver/palotina-ctm-3/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=39&HEIGHT=30&legend_options=fontSize:14;fontName:Arial;fontAntiAliasing:true;dpi:80;forceLabels:on;hideEmptyRules:false&LAYER=palotina-ctm-3:perimetro_urbano';
 
 
 function isMobileDevice() {
@@ -109,7 +109,7 @@ map.on('singleclick', async function (event) {
         'EPSG:3857',
         {
             'INFO_FORMAT': 'application/json',
-            'QUERY_LAYERS': 'drz:pesquisa_imobiliaria_santa_fe'
+            'QUERY_LAYERS': 'drz:pesquisa_imobiliaria_santafe'
         }
     );
 
@@ -199,11 +199,11 @@ map.on('singleclick', async function (event) {
                 const wfsUrl = 'https://pedromiguez.com.br/geoserver/ows';
                 const wfsParams = new URLSearchParams({
                     'service': 'WFS',
-                    'version': '1.3.0',
+                    'version': '1.0.0',
                     'request': 'GetFeature',
-                    'typeName': 'drz:pgv_rural_imovel_santa_fe',
+                    'typeName': 'drz:pgv_rural_imovel_santafe',
                     'outputFormat': 'application/json',
-                    'featureID': 'pgv_rural_imovel_santa_fe.' + idNumber // Ajuste o prefixo conforme necessário
+                    'featureID': 'pgv_rural_imovel_santafe.' + idNumber // Ajuste o prefixo conforme necessário
                 });
 
                 const fullWfsUrl = wfsUrl + '?' + wfsParams.toString();
@@ -277,10 +277,10 @@ map.on('singleclick', async function (event) {
 
                     // Atualiza a camadaPGV para excluir a feição selecionada
                     var source = camadaPGV.getSource();
-
                     // Ajuste 'id' para corresponder ao nome da propriedade no seu conjunto de dados
                     var cqlFilter = 'fid <> ' + idNumber; // Use aspas se o ID for string: 'id <> \'' + idNumber + '\''
-
+                    console.log('AQUI')
+                    console.log(cqlFilter)
                     // Atualiza os parâmetros da fonte
                     source.updateParams({
                         'CQL_FILTER': cqlFilter
@@ -314,7 +314,7 @@ map.on('singleclick', async function (event) {
                 }
             }
         } catch (error) {
-            console.error("Erro ao obter dados da feição (pgv_rural_imovel_santa_fe):", error);
+            console.error("Erro ao obter dados da feição (pgv_rural_imovel_santafe):", error);
         }
     }
 
