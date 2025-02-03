@@ -43,9 +43,12 @@ Promise.all([
 
 // Camadas de uso e as respectivas datas
 var usoLayers = [
+    { layerName: 'uso_ocupacao_solo_06_03_2022', date: 'Safra 21/22 Verão', orthoLayer: 'imagem_aerea_06_03_2022' },
+    { layerName: 'uso_ocupacao_solo_07_05_2022', date: 'Safra 21/22 Inverno', orthoLayer: 'imagem_aerea_07_05_2022' },
     { layerName: 'uso_ocupacao_solo_10_12_2022', date: 'Safra 22/23 Verão', orthoLayer: 'imagem_aerea_10_12_2022' },
     { layerName: 'uso_ocupacao_solo_15_07_2023', date: 'Safra 23 Inverno', orthoLayer: 'imagem_aerea_15_07_2023' },
     { layerName: 'uso_ocupacao_solo_17_12_2023', date: 'Safra 23/24 Verão', orthoLayer: 'imagem_aerea_17_12_2023' },
+
 ];
 
 // Camada de uso do solo inicial
