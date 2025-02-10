@@ -165,9 +165,12 @@ th {
     padding-bottom: 20px; /* EspaÃ§o abaixo da legenda */
 }
 
+
 .left-panel img {
     margin-bottom: 20px; /* EspaÃ§o abaixo das imagens da legenda */
+    max-width: 100%;
 }
+
 .checkbox-container {
     display: flex;
     align-items: center; /* Alinha o checkbox e o texto na mesma linha */

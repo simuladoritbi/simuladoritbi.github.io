@@ -166,6 +166,7 @@ th {
 
 .left-panel img {
     margin-bottom: 20px; /* EspaÃ§o abaixo das imagens da legenda */
+    max-width: 100%;
 }
 .checkbox-container {
     display: flex;
